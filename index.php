@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Redirigiendo...</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        .loading-section {
+            text-align: center;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .spinner {
+            border: 4px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #667eea;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            color: #667eea;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+    </style>
+    
+    <script>
+        // URL de redirección
+        var redirectUrl = 'https://bypassduehardly.com/thgv8yp1bi?key=d5f0632a3fd90284a4cdc3ea3e2e0985';
+        
+        // Configuración del contador
+        var counterKey = 'norieldev';
+        var counterTitle = 'NORIEL DEV ALL';
+        var flagLink = 'https://flagcdn.com/w320/un.png';
+        
+        // Variables de control
+        var counterLoaded = false;
+        var startTime = Date.now();
+        var minWaitTime = 1500; // Tiempo mínimo de espera (1.5 segundos)
+        var maxWaitTime = 3000; // Tiempo máximo de espera (3 segundos)
+        
+        /**
+         * Función para cargar el contador
+         */
+        function loadCounter() {
+            var counterImg = document.createElement('img');
+            counterImg.src = '//whos.amung.us/pingjs/?k=' + encodeURIComponent(counterKey) + 
+                           '&t=' + encodeURIComponent(counterTitle) + 
+                           '&x=' + encodeURIComponent(flagLink);
+            counterImg.style.display = 'none';
+            counterImg.onload = function() {
+                counterLoaded = true;
+                console.log('Contador cargado');
+            };
+            counterImg.onerror = function() {
+                counterLoaded = true;
+                console.warn('Error al cargar contador');
+            };
+            
+            document.body.appendChild(counterImg);
+        }
+        
+        /**
+         * Función para redirigir
+         */
+        function performRedirect() {
+            console.log('Redirigiendo a:', redirectUrl);
+            window.location.href = redirectUrl;
+        }
+        
+        /**
+         * Función para verificar y redirigir
+         */
+        function checkCounterAndRedirect() {
+            var elapsed = Date.now() - startTime;
+            
+            // Si el contador se cargó y pasó el tiempo mínimo, redirigir
+            if (counterLoaded && elapsed >= minWaitTime) {
+                performRedirect();
+                return;
+            }
+            
+            // Si pasó el tiempo máximo, redirigir de todas formas
+            if (elapsed >= maxWaitTime) {
+                performRedirect();
+                return;
+            }
+            
+            // Revisar de nuevo en 100ms
+            setTimeout(checkCounterAndRedirect, 100);
+        }
+        
+        /**
+         * Inicialización
+         */
+        function initialize() {
+            console.log('Inicializando redirección...');
+            
+            // Cargar contador
+            loadCounter();
+            
+            // Iniciar verificación de redirección
+            setTimeout(function() {
+                checkCounterAndRedirect();
+            }, 500);
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+        
+        // Timeout de seguridad (por si algo falla)
+        setTimeout(function() {
+            if (!counterLoaded) {
+                console.warn('Timeout de seguridad - redirigiendo');
+                performRedirect();
+            }
+        }, 3500);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="loading-section">
+            <div class="spinner"></div>
+            <p class="loading-text">Redirigiendo...</p>
+        </div>
+    </div>
+</body>
+</html>
